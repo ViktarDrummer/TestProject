@@ -1,0 +1,10 @@
+[
+    {
+        "TextToSearch": "Automation",
+        "SearchUrl": "search?q=Automation"
+    },
+    {
+        "TextToSearch": "Test",
+        "SearchUrl": "search?q=Test"
+    }
+]
