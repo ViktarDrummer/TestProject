@@ -12,7 +12,13 @@ namespace TestProject.WebDriver
             switch (browserType)
             {
                 case BrowserType.Chrome:
-                    return new ChromeDriver();
+                    {
+                        var service = ChromeDriverService.CreateDefaultService();
+                        ChromeOptions options = new ChromeOptions();
+                        options.AddArgument("disable-infobars");
+                        options.AddArgument("--incognito");
+                        return new ChromeDriver(service, options, TimeSpan.FromSeconds(30));
+                    }
                 case BrowserType.Edge:
                     return new EdgeDriver();
                 case BrowserType.Firefox:
