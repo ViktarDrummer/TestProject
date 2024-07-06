@@ -25,7 +25,6 @@ jobs:
     
     - name: Restore dependencies
       run: dotnet restore
-      working-directory: TestProject.sln
 
     - name: Build
       run: dotnet build --no--restore 
