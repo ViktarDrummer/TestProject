@@ -3,7 +3,7 @@ name: Test Project CI
 on: 
   push: 
     branches: 
-      -  ci/gitHubActionsWorkflow
+      -  main
   pull_request:
     branches: 
       - main
@@ -17,9 +17,6 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-      # next step is optional, becasue command above is checking out code from current repo by default.
-      with: 
-        repository: ${{ github.repository }}
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
@@ -30,8 +27,8 @@ jobs:
       run: dotnet restore
 
     - name: Build
-      run: dotnet build --no--restore # --no--retore used because we used it in step before.
+      run: dotnet build --no--restore 
 
     - name: Run tests
-      run: dotnet test --no-build # --no-build used because we've build everything already in the step above.
+      run: dotnet test --no-build 
 
