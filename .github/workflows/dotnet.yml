@@ -28,8 +28,10 @@ jobs:
       working-directory: TestProject/
 
     - name: Build
-      run: dotnet build --no-restore 
+      run: dotnet build --no-restore
+      working-directory: TestProject/
 
     - name: Run tests
       run: dotnet test --no-build 
+      working-directory: TestProject/
 
