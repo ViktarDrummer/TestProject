@@ -16,7 +16,7 @@ namespace TestProject.TestsUI
         public override void SetUp()
         {
             base.SetUp();
-            _homePage = new HomePage(BrowserManager.GetDriver());
+            _homePage = new HomePage(WebDriverWrapper);
         }
 
         [Test]
@@ -25,13 +25,13 @@ namespace TestProject.TestsUI
             string textToFind,
             string searchUrl)
         {
-            Logger.Instance.Info("Starting the test 'SearchOnIndexPageTest_Updated'.");
+            Logger.Information("Starting the test 'SearchOnIndexPageTest_Updated'.");
             _homePage.ClickSearchIcon()
                 .EnterSearchTextUsingActions(textToFind)
                 .ClickFindButton();
-            var currentUrl = BrowserManager.GetDriver().Url;
+            var currentUrl = WebDriverWrapper.GetDriver().Url;
             currentUrl.Should().Contain(searchUrl);
-            Logger.Instance.Info("Ending the test 'SearchOnIndexPageTest_Updated'.");
+            Logger.Information("Ending the test 'SearchOnIndexPageTest_Updated'.");
         }
 
         [Test]
@@ -39,13 +39,13 @@ namespace TestProject.TestsUI
         public void SearchOnIndexPageTest_Updated_WithJsonData(
             SearchModel searchModelItem)
         {
-            Logger.Instance.Info("Starting the test 'SearchOnIndexPageTest_Updated'.");
+            Logger.Information("Starting the test 'SearchOnIndexPageTest_Updated'.");
             _homePage.ClickSearchIcon()
                 .EnterSearchTextUsingActions(searchModelItem.TextToSearch)
                 .ClickFindButton();
-            var currentUrl = BrowserManager.GetDriver().Url;
+            var currentUrl = WebDriverWrapper.GetDriver().Url;
             currentUrl.Should().Contain(searchModelItem.SearchUrl);
-            Logger.Instance.Info("Ending the test 'SearchOnIndexPageTest_Updated'.");
+            Logger.Information("Ending the test 'SearchOnIndexPageTest_Updated'.");
         }
 
         private static List<SearchModel> SearchModelData

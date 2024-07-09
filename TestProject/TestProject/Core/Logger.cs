@@ -1,11 +1,28 @@
-﻿using NLog;
+﻿using Serilog;
 
 namespace TestProject.Core
 {
-    public static class Logger
+    public class Logger
     {
-        private static readonly NLog.Logger _logger = LogManager.GetCurrentClassLogger();
+        private readonly ILogger _logger;
 
-        public static NLog.Logger Instance => _logger;
+        public Logger()
+        {
+            _logger = new LoggerConfiguration()
+                .WriteTo.Console()
+                .CreateLogger();
+        }
+
+        public void Information(string message)
+        {
+            _logger.Information("[INFO]: " + message);
+        }
+
+        public void Error(string message)
+        {
+            _logger.Error("[ERROR]: " + message);
+        }
+
+        // Other methods for different logger levels like Debug, Warning, etc.
     }
 }

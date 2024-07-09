@@ -7,7 +7,8 @@ namespace TestProject.TestsUI
 {
     public abstract class BaseTest
     {
-        protected BrowserManager BrowserManager { get; private set; }
+        protected WebDriverWrapper WebDriverWrapper { get; private set; }
+        protected Logger Logger { get; private set; }
 
         [SetUp]
         public virtual void SetUp()
@@ -15,15 +16,17 @@ namespace TestProject.TestsUI
             var browserType = (BrowserType)Enum.Parse(typeof(BrowserType),
                 Configuration.BrowserType);
 
-            BrowserManager = new BrowserManager(browserType);
-            BrowserManager.StartBrowser();
-            BrowserManager.NavigateTo(Configuration.AppUrl);
+            WebDriverWrapper = new WebDriverWrapper(browserType);
+            WebDriverWrapper.StartBrowser();
+            WebDriverWrapper.NavigateTo(Configuration.AppUrl);
+
+            Logger = Logger ?? new Logger();
         }
 
         [TearDown]
         public virtual void TearDown()
         {
-            BrowserManager.Close();
+            WebDriverWrapper.Close();
         }
     }
 }

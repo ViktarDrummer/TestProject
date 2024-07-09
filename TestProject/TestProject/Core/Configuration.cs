@@ -16,7 +16,7 @@ namespace TestProject.Core
 
             IConfigurationRoot configuration = builder.Build();
 
-            return configuration[$"AppSettings:{value}"] ?? defaultValue;
+            return configuration[$"{value}"] ?? defaultValue;
         }
     }
 }
