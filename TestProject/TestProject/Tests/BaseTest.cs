@@ -16,7 +16,7 @@ namespace TestProject.TestsUI
             var browserType = (BrowserType)Enum.Parse(typeof(BrowserType),
                 Configuration.BrowserType);
 
-            WebDriverWrapper = new WebDriverWrapper(browserType);
+            WebDriverWrapper = new WebDriverWrapper();
             WebDriverWrapper.StartBrowser();
             WebDriverWrapper.NavigateTo(Configuration.AppUrl);
 
