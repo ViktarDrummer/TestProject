@@ -23,6 +23,8 @@ namespace TestProject.WebDriver
                         ChromeOptions options = new ChromeOptions();
                         options.AddArgument("disable-infobars");
                         options.AddArgument("--incognito");
+                        options.AddArgument("--remote-debugging-port=9222");
+                        options.AddArgument("--no-sandbox");
 
                         // Add headless run option
                         if (Configuration.Headless)
