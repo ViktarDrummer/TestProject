@@ -33,11 +33,6 @@ namespace TestProject.Core.WebDriver
             _driver.Navigate().GoToUrl(url);
         }
 
-        public IWebDriver GetDriver()
-        {
-            return _driver;
-        }
-
         public void WindowMaximise()
         {
             _driver.Manage().Window.Maximize();
@@ -46,6 +41,11 @@ namespace TestProject.Core.WebDriver
         public string GetTitle()
         {
             return _driver.Title;
+        }
+
+        public string GetUrl()
+        {
+            return _driver.Url;
         }
     }
 }

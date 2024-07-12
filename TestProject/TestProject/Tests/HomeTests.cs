@@ -19,7 +19,6 @@ namespace TestProject.TestsUI
             _homePage = new HomePage(WebDriverWrapper);
         }
 
-        [Test]
         [TestCase("Automation", "search?q=Automation")]
         public void SearchOnIndexPageTest_Updated(
             string textToFind,
@@ -29,12 +28,11 @@ namespace TestProject.TestsUI
             _homePage.ClickSearchIcon()
                 .EnterSearchTextUsingActions(textToFind)
                 .ClickFindButton();
-            var currentUrl = WebDriverWrapper.GetDriver().Url;
+            var currentUrl = WebDriverWrapper.GetUrl();
             currentUrl.Should().Contain(searchUrl);
             Logger.Information("Ending the test 'SearchOnIndexPageTest_Updated'.");
         }
 
-        [Test]
         [TestCaseSource(nameof(SearchModelData))]
         public void SearchOnIndexPageTest_Updated_WithJsonData(
             SearchModel searchModelItem)
@@ -43,7 +41,7 @@ namespace TestProject.TestsUI
             _homePage.ClickSearchIcon()
                 .EnterSearchTextUsingActions(searchModelItem.TextToSearch)
                 .ClickFindButton();
-            var currentUrl = WebDriverWrapper.GetDriver().Url;
+            var currentUrl = WebDriverWrapper.GetUrl();
             currentUrl.Should().Contain(searchModelItem.SearchUrl);
             Logger.Information("Ending the test 'SearchOnIndexPageTest_Updated'.");
         }
@@ -53,8 +51,8 @@ namespace TestProject.TestsUI
             get
             {
                 var jsonData = File.ReadAllText(Configuration.TestDataPath);
-                var SearchModelItems = JsonConvert.DeserializeObject<List<SearchModel>>(jsonData);
-                return SearchModelItems;
+                var searchModelItems = JsonConvert.DeserializeObject<List<SearchModel>>(jsonData);
+                return searchModelItems;
             }
         }
     }
