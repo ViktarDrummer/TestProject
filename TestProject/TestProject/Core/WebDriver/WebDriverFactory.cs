@@ -9,7 +9,10 @@ namespace TestProject.WebDriver
     public static class WebDriverFactory
     {
         public static IWebDriver CreateWebDriver()
-        { 
+        {
+            /* TODO: @Aleh or @Valiantsina,
+             * please take a look on this condition, just took browser from configuration, and as out param we are getting enum.
+            */
             if (!Enum.TryParse(Configuration.BrowserType, true, out BrowserType browserType))
             {
                 throw new ArgumentException($"Unsupported browser type: {Configuration.BrowserType}");
@@ -20,12 +23,11 @@ namespace TestProject.WebDriver
                 case BrowserType.Chrome:
                     {
                         var service = ChromeDriverService.CreateDefaultService();
-                        ChromeOptions options = new ChromeOptions();
+                        ChromeOptions options = new();
                         options.AddArgument("--no-sandbox");
                         options.AddArgument("disable-infobars");
                         options.AddArgument("--incognito");
                         options.AddArgument("--disable-dev-shm-usage");
-                        options.AddArgument("--no-sandbox");
 
                         // Add headless run option
                         if (Configuration.Headless)

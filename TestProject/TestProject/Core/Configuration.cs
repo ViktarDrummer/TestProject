@@ -7,7 +7,7 @@ namespace TestProject.Core
         public static string BrowserType = GetAppSettingsValue("BrowserType", "Chrome");
         public static string AppUrl = GetAppSettingsValue("ApplicationUrl", string.Empty);
         public static string TestDataPath = GetAppSettingsValue("TestDataPath", string.Empty);
-        public static bool Headless = GetAppSettingsBoolValue("Headless", true);
+        public static bool Headless = GetAppSettingsBoolValue("Headless", false);
 
         public static string GetAppSettingsValue(string value, string defaultValue)
         {
@@ -20,7 +20,7 @@ namespace TestProject.Core
             return configuration[$"{value}"] ?? defaultValue;
         }
 
-        private static bool GetAppSettingsBoolValue(string key, bool defaultValue)
+        private static bool GetAppSettingsBoolValue(string value, bool defaultValue)
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -28,7 +28,9 @@ namespace TestProject.Core
 
             IConfigurationRoot configuration = builder.Build();
 
-            if (bool.TryParse(configuration[$"AppSettings:{key}"], out bool result))
+            string configValue = configuration[$"{value}"];
+
+            if (bool.TryParse(configValue, out bool result))
             {
                 return result;
             }
