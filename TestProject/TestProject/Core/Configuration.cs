@@ -7,7 +7,7 @@ namespace TestProject.Core
         public static string BrowserType = GetAppSettingsValue("BrowserType", "Chrome");
         public static string AppUrl = GetAppSettingsValue("ApplicationUrl", string.Empty);
         public static string TestDataPath = GetAppSettingsValue("TestDataPath", string.Empty);
-        public static bool Headless = GetAppSettingsBoolValue("Headless", false);
+        public static bool Headless = GetAppSettingsBoolValue("Headless", true);
 
         public static string GetAppSettingsValue(string value, string defaultValue)
         {

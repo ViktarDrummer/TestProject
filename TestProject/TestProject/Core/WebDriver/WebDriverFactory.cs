@@ -21,9 +21,10 @@ namespace TestProject.WebDriver
                     {
                         var service = ChromeDriverService.CreateDefaultService();
                         ChromeOptions options = new ChromeOptions();
+                        options.AddArgument("--no-sandbox");
                         options.AddArgument("disable-infobars");
                         options.AddArgument("--incognito");
-                        options.AddArgument("--remote-debugging-port=9222");
+                        options.AddArgument("--disable-dev-shm-usage");
                         options.AddArgument("--no-sandbox");
 
                         // Add headless run option
