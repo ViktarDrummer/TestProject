@@ -10,9 +10,9 @@ namespace TestProject.Core.WebDriver
 
         private const int WaitTimeInSeconds = 10;
 
-        public WebDriverWrapper(BrowserType browserType)
+        public WebDriverWrapper()
         {
-            _driver = WebDriverFactory.CreateWebDriver(browserType);
+            _driver = WebDriverFactory.CreateWebDriver();
             _timeout = TimeSpan.FromSeconds(WaitTimeInSeconds);
         }
 

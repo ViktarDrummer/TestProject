@@ -2,21 +2,38 @@
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
+using TestProject.Core;
 
 namespace TestProject.WebDriver
 {
     public static class WebDriverFactory
     {
-        public static IWebDriver CreateWebDriver(BrowserType browserType)
+        public static IWebDriver CreateWebDriver()
         {
+            /* TODO: @Aleh or @Valiantsina,
+             * please take a look on this condition, just took browser from configuration, and as out param we are getting enum.
+            */
+            if (!Enum.TryParse(Configuration.BrowserType, true, out BrowserType browserType))
+            {
+                throw new ArgumentException($"Unsupported browser type: {Configuration.BrowserType}");
+            }
+
             switch (browserType)
             {
                 case BrowserType.Chrome:
                     {
                         var service = ChromeDriverService.CreateDefaultService();
-                        ChromeOptions options = new ChromeOptions();
+                        ChromeOptions options = new();
+                        options.AddArgument("--no-sandbox");
                         options.AddArgument("disable-infobars");
                         options.AddArgument("--incognito");
+                        options.AddArgument("--disable-dev-shm-usage");
+
+                        // Add headless run option
+                        if (Configuration.Headless)
+                        {
+                            options.AddArgument("--headless");
+                        }
                         return new ChromeDriver(service, options, TimeSpan.FromSeconds(30));
                     }
                 case BrowserType.Edge:
@@ -28,6 +45,7 @@ namespace TestProject.WebDriver
             }
         }
     }
+
     public enum BrowserType
     {
         Chrome,
