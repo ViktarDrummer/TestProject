@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using TestProject.Core;
 using TestProject.Core.WebDriver;
+using TestProject.WebDriver;
 
 namespace TestProject.TestsUI
 {
@@ -12,7 +13,10 @@ namespace TestProject.TestsUI
         [SetUp]
         public virtual void SetUp()
         {
-            WebDriverWrapper = new WebDriverWrapper();
+            var browserType = (BrowserType)Enum.Parse(typeof(BrowserType),
+                Configuration.BrowserType);
+
+            WebDriverWrapper = new WebDriverWrapper(browserType);
             WebDriverWrapper.StartBrowser();
             WebDriverWrapper.NavigateTo(Configuration.AppUrl);
 
