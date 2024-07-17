@@ -8,16 +8,8 @@ namespace TestProject.WebDriver
 {
     public static class WebDriverFactory
     {
-        public static IWebDriver CreateWebDriver()
+        public static IWebDriver CreateWebDriver(BrowserType browserType)
         {
-            /* TODO: @Aleh or @Valiantsina,
-             * please take a look on this condition, just took browser from configuration, and as out param we are getting enum.
-            */
-            if (!Enum.TryParse(Configuration.BrowserType, true, out BrowserType browserType))
-            {
-                throw new ArgumentException($"Unsupported browser type: {Configuration.BrowserType}");
-            }
-
             switch (browserType)
             {
                 case BrowserType.Chrome:
