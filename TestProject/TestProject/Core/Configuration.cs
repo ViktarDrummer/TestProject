@@ -28,7 +28,7 @@ namespace TestProject.Core
 
             IConfigurationRoot configuration = builder.Build();
 
-            string configValue = configuration[$"{value}"];
+            string? configValue = configuration[$"{value}"];
 
             if (bool.TryParse(configValue, out bool result))
             {
